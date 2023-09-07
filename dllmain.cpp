@@ -171,8 +171,8 @@ BOOL __stdcall CEPlugin_GetVersion(PPluginVersion pv, int sizeofpluginversion)
 
 int lua_pluginExample(lua_State* L) //make sure this is cdecl
 {
-	Exported.ShowMessage("Called from lua");
-	lua_pushinteger(L, 123);
+	//Exported.ShowMessage("Called from lua");
+	//lua_pushinteger(L, 123);
 	return 1;
 }
 
@@ -193,53 +193,53 @@ BOOL __stdcall CEPlugin_InitializePlugin(PExportedFunctions ef, int pluginid)
 	if (Exported.sizeofExportedFunctions != sizeof(Exported))
 		return FALSE;
 
-	//rightclick on address plugin
-	init0.name = "Sample plugin: Addresslist";
-	init0.callbackroutine = addresslistplugin;
-	addresslistPluginID = Exported.RegisterFunction(pluginid, ptAddressList, &init0); //adds a plugin menu item to the memory view
-	if (addresslistPluginID == -1)
-	{
-		Exported.ShowMessage("Failure to register the addresslist plugin");
-		return FALSE;
-	}
+	////rightclick on address plugin
+	//init0.name = "Sample plugin: Addresslist";
+	//init0.callbackroutine = addresslistplugin;
+	//addresslistPluginID = Exported.RegisterFunction(pluginid, ptAddressList, &init0); //adds a plugin menu item to the memory view
+	//if (addresslistPluginID == -1)
+	//{
+	//	Exported.ShowMessage("Failure to register the addresslist plugin");
+	//	return FALSE;
+	//}
 
-	//memory browser plugin menu:
-	init1.name = "Sample plugin: Memoryview";
-	init1.callbackroutine = memorybrowserplugin;
-	init1.shortcut = "Ctrl+Q";
-	memorybrowserpluginid = Exported.RegisterFunction(pluginid, ptMemoryView, &init1); //adds a plugin menu item to the memory view
-	if (memorybrowserpluginid == -1)
-	{
-		Exported.ShowMessage("Failure to register the memoryview plugin");
-		return FALSE;
-	}
+	////memory browser plugin menu:
+	//init1.name = "Sample plugin: Memoryview";
+	//init1.callbackroutine = memorybrowserplugin;
+	//init1.shortcut = "Ctrl+Q";
+	//memorybrowserpluginid = Exported.RegisterFunction(pluginid, ptMemoryView, &init1); //adds a plugin menu item to the memory view
+	//if (memorybrowserpluginid == -1)
+	//{
+	//	Exported.ShowMessage("Failure to register the memoryview plugin");
+	//	return FALSE;
+	//}
 
-	//On Debug event plugin	
-	init2.callbackroutine = debugeventplugin;
-	debugpluginID = Exported.RegisterFunction(pluginid, ptOnDebugEvent, &init2); //adds a plugin menu item to the memory view
-	if (debugpluginID == -1)
-	{
-		Exported.ShowMessage("Failure to register the ondebugevent plugin");
-		return FALSE;
-	}
+	////On Debug event plugin	
+	//init2.callbackroutine = debugeventplugin;
+	//debugpluginID = Exported.RegisterFunction(pluginid, ptOnDebugEvent, &init2); //adds a plugin menu item to the memory view
+	//if (debugpluginID == -1)
+	//{
+	//	Exported.ShowMessage("Failure to register the ondebugevent plugin");
+	//	return FALSE;
+	//}
 
-	//Processwatcher event (process creation/destruction)
-	init3.callbackroutine = processWatcherEvent;
-	ProcesswatchpluginID = Exported.RegisterFunction(pluginid, ptProcesswatcherEvent, &init3); //adds a plugin menu item to the memory view
-	if (ProcesswatchpluginID == -1)
-	{
-		Exported.ShowMessage("Failure to register the processwatcherevent plugin");
-		return FALSE;
-	}
+	////Processwatcher event (process creation/destruction)
+	//init3.callbackroutine = processWatcherEvent;
+	//ProcesswatchpluginID = Exported.RegisterFunction(pluginid, ptProcesswatcherEvent, &init3); //adds a plugin menu item to the memory view
+	//if (ProcesswatchpluginID == -1)
+	//{
+	//	Exported.ShowMessage("Failure to register the processwatcherevent plugin");
+	//	return FALSE;
+	//}
 
-	//Pointer reassignment event
-	init4.callbackroutine = PointersReassigned;
-	PointerReassignmentPluginID = Exported.RegisterFunction(pluginid, ptFunctionPointerchange, &init4); //adds a plugin menu item to the memory view
-	if (PointerReassignmentPluginID == -1)
-	{
-		Exported.ShowMessage("Failure to register the pointer reassignment plugin");
-		return FALSE;
-	}
+	////Pointer reassignment event
+	//init4.callbackroutine = PointersReassigned;
+	//PointerReassignmentPluginID = Exported.RegisterFunction(pluginid, ptFunctionPointerchange, &init4); //adds a plugin menu item to the memory view
+	//if (PointerReassignmentPluginID == -1)
+	//{
+	//	Exported.ShowMessage("Failure to register the pointer reassignment plugin");
+	//	return FALSE;
+	//}
 
 	//Main menu plugin
 
@@ -254,7 +254,7 @@ BOOL __stdcall CEPlugin_InitializePlugin(PExportedFunctions ef, int pluginid)
 	}
 
 	lua_State* lua_state = ef->GetLuaState();
-	HideModule();
+	//HideModule();
 	lua_register(lua_state, "pluginExample", lua_pluginExample);
 	//Exported.ShowMessage("The \"lulusys_hide\" plugin got enabled");
 	return TRUE;
